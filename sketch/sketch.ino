@@ -41,11 +41,13 @@ void setup() {
 void loop() {
   //uint8_t bytes[num_vals * sizeof(float)];
   uint8_t packet[2 + NUM_FLOATS * sizeof(float)];
-  
   spi.depopulate(*buffer, 12);
+    
   for(uint8_t i = 0; i < 12; i++) {
-    Monitor.print(buffer[i], HEX); Monitor.print(", ");
-  } Monitor.println();
+    Monitor.print(buffer[i], HEX); 
+    Monitor.print(", ");
+  } 
+  Monitor.println();
 
   //if(buffer[0] == 0x0B) {
     // Convert float array → bytes
