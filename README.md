@@ -87,8 +87,7 @@ if spi.begin():
 
 ## Demonstration Data Source
 
-For demonstration purposes, the MCU generates an array of randomly generated floating-point values for demonstration purposes.
-
+For demonstration purposes, the MCU generates an array of random floating-point values.  
 The generated values are packed into an SPI frame and transmitted to the MPU through SPI3.
 
 In a real-world application, these values could easily be replaced by:
