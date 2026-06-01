@@ -158,8 +158,13 @@ Successfully tested on Arduino UNO Q.
 
 ---
 
-## important note
+## Credits
 
-`SPIPeripheral.h` is based on work by @facchinm from the ArduinoCore-zephyr SPI peripheral interface PR.
+This proof-of-concept is based on the SPI3 peripheral support work by @facchinm:
+
+- ArduinoCore-zephyr PR #383
+- Original SPI3 discussion on the Arduino Forum
+
+The App Lab brick and MPU-side proof-of-concept were developed from these foundations.
 
 ---
