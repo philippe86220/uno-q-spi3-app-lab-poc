@@ -55,12 +55,9 @@ void loop() {
     packet[0] = HEADER_BYTE;
     packet[1] = NUM_FLOATS;
 
-    memcpy(&packet[2],
-           sensorValues,
-           NUM_FLOATS * sizeof(float));
+    memcpy(&packet[2], sensorValues,NUM_FLOATS * sizeof(float));
 
-    spi.populate(packet,
-                 sizeof(packet));
+    spi.populate(packet, sizeof(packet));
 
     spi.ready();
  }
