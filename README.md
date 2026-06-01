@@ -156,6 +156,10 @@ Experimental Project (POC)
 
 Successfully tested on Arduino UNO Q.
 
+---
+
 ## important note
 
 `SPIPeripheral.h` is based on work by @facchinm from the ArduinoCore-zephyr SPI peripheral interface PR.
+
+---
