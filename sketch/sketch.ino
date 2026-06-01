@@ -30,7 +30,7 @@ void get_sensor_data() {
 }
 void setup() {
   Monitor.begin();
-  delay(2000);
+  delay(5000);
   Monitor.println("Begin SPI3 Test....");
 
   randomSeed(analogRead(A0));
