@@ -1,1 +1,6 @@
-
+name: spi
+description: ""
+ports: []
+bricks:
+- spi3: {}
+icon: 🔌
