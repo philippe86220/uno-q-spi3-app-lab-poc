@@ -149,10 +149,13 @@ This project was created as part of a personal exploration of the Arduino UNO Q 
 
 A significant part of the investigation, debugging, experimentation, and design process was carried out with the assistance of ChatGPT.
 
----
 
 ## Status
 
 Experimental Project (POC)
 
 Successfully tested on Arduino UNO Q.
+
+## important note
+
+`SPIPeripheral.h` is based on work by @facchinm from the ArduinoCore-zephyr SPI peripheral interface PR.
