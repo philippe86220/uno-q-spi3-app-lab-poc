@@ -1,5 +1,3 @@
-# uno-q-spi3-app-lab-poc
-
 # Arduino UNO Q - SPI3 App Lab Brick (Proof Of Concept)
 
 ## Introduction
