@@ -1,8 +1,6 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <string.h>
-
-#include "Arduino_RouterBridge.h"
 #include "SPIPeripheral.h"
 
 
