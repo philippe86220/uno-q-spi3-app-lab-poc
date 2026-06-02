@@ -143,6 +143,129 @@ Its primary purpose is to demonstrate:
 
 ---
 
+## Why does this custom Brick use a Docker service and an HTTP API?
+
+A common question is:
+
+> Why not access `/dev/spidev0.0` directly from `main.py`?
+
+The answer is that Arduino App Lab applications run in a managed environment that does not necessarily have direct access to all Linux devices, system packages, or kernel interfaces.
+
+In this proof of concept:
+
+```text
+MCU
+  ↓
+SPI3
+  ↓
+/dev/spidev0.0
+  ↓
+Docker service
+  ↓
+HTTP API
+  ↓
+App Lab Python code
+```
+
+The custom Brick creates a dedicated Linux service running inside a container.
+
+This service:
+
+* has access to `/dev/spidev0.0`
+* installs and uses `python3-spidev`
+* communicates directly with the SPI3 interface
+* exposes a simple HTTP API
+
+The App Lab Python code does not need to know how SPI transactions are performed. It simply calls:
+
+```python
+spi = SPI3()
+
+value = spi.read_float()
+values = spi.read_floats()
+```
+
+The Brick acts as an abstraction layer between the App Lab application and the Linux SPI device.
+
+This approach provides several advantages:
+
+* keeps the App code simple
+* isolates Linux-specific dependencies
+* makes the functionality reusable across multiple projects
+* follows the philosophy of App Lab Bricks as reusable building blocks
+
+The same architecture could be used for many other Linux resources, such as:
+
+* ALSA audio devices
+* GPS receivers
+* serial ports
+* I2C devices
+* network services
+* custom hardware interfaces
+
+The SPI3 proof of concept demonstrates one practical example of this pattern.
+
+---
+
+## Why use an HTTP server?
+
+Some readers may wonder why this project uses an HTTP server.
+
+The answer is simple:
+
+The HTTP server is not used to create a website.
+
+It is only used as a communication channel between two Python programs running on the Linux MPU.
+
+Think of it this way:
+
+```text
+App Lab Python
+        |
+        | "Please give me the SPI3 values"
+        v
+SPI3 Service
+        |
+        | Reads /dev/spidev0.0
+        v
+SPI3 Hardware
+```
+
+The HTTP request is simply a message sent from one program to another.
+
+For example:
+
+```python
+spi.read_floats()
+```
+
+internally becomes:
+
+```text
+GET /values
+```
+
+The SPI3 service receives this request, reads the SPI3 interface, and sends the result back.
+
+The App Lab application then receives the values and continues normally.
+
+Why use HTTP?
+
+Because it is:
+
+* simple
+* reliable
+* easy to debug
+* supported by standard Python libraries
+
+The HTTP server is only running locally inside the UNO Q Linux environment.
+
+No Internet connection is required.
+
+You can think of it as a "messenger" between the App Lab application and the Linux service that has access to the SPI3 device.
+
+---
+
 ## Acknowledgements
 
 This project was created as part of a personal exploration of the Arduino UNO Q platform.
