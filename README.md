@@ -245,6 +245,33 @@ internally becomes:
 GET /values
 ```
 
+The complete request/response cycle is shown below:
+
+```text
+App Lab Python code
+        |
+        | HTTP request: GET /values
+        v
+Docker SPI3 service
+        |
+        | spidev read/write
+        v
+/dev/spidev0.0
+        |
+        | SPI3
+        v
+MCU
+
+Then the response follows the reverse path:
+
+MCU
+  -> SPI3
+  -> /dev/spidev0.0
+  -> Docker SPI3 service
+  -> HTTP response
+  -> App Lab Python code
+```
+
 The SPI3 service receives this request, reads the SPI3 interface, and sends the result back.
 
 The App Lab application then receives the values and continues normally.
